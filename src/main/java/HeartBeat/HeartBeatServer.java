@@ -4,6 +4,6 @@ import Commons.LocalServer;
 
 public class HeartBeatServer {
     public static void main(String[] args) throws Exception {
-        new LocalServer(new HeartBeatChannelInitializer()).run();
+        new LocalServer(new HeartBeatServerInitializer()).run();
     }
 }
