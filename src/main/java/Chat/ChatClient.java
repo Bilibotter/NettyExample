@@ -11,7 +11,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class ChatClient {
-    private final ChannelInitializer<SocketChannel> initializer = new ChatClientInitializer();
+    private final ChannelInitializer<SocketChannel> initializer;
+    public ChatClient() {
+        this(new ChatClientInitializer());
+    }
+    public ChatClient(ChannelInitializer<SocketChannel> initializer){
+        this.initializer = initializer;
+    }
     public void run() throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
