@@ -8,8 +8,9 @@ import io.netty.util.CharsetUtil;
 
 public class HeartBeatServerHandler extends ChannelInboundHandlerAdapter {
     private final static ByteBuf HEART_BEAT = Unpooled.unreleasableBuffer(
-            Unpooled.copiedBuffer("Heart Beat".getBytes(CharsetUtil.UTF_8))
+            Unpooled.copiedBuffer("Heart Beat\n".getBytes(CharsetUtil.UTF_8))
     );
+
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {
