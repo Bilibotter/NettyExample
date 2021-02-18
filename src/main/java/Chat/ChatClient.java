@@ -10,6 +10,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+
 public class ChatClient {
     private final ChannelInitializer<SocketChannel> initializer;
     public ChatClient() {
