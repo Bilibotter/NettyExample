@@ -19,7 +19,6 @@ public class BankClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new ProtobufDecoder(BankPOJO.Bank.getDefaultInstance()));
         pipeline.addLast(new ProtobufVarint32LengthFieldPrepender());
         pipeline.addLast(new ProtobufEncoder());
-        // pipeline.addLast(new BankClientHandler());
         pipeline.addLast(handler);
     }
 }

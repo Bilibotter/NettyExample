@@ -2,14 +2,18 @@ package Https;
 
 import Http.HttpServerHandler;
 import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.ssl.OptionalSslHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+
+import javax.net.ssl.SSLHandshakeException;
 
 public class HttpsServerInitializer extends ChannelInitializer<SocketChannel> {
     private final static ChannelHandler handler = new HttpServerHandler();
@@ -22,7 +26,9 @@ public class HttpsServerInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
 
-        pipeline.addLast(sslCtx.newHandler(socketChannel.alloc()));
+        // pipeline.addLast(sslCtx.newHandler(socketChannel.alloc()));
+
+        pipeline.addFirst(new OptionalSslHandler(sslCtx));
 
         pipeline.addLast(new HttpServerCodec());
         // 拆包与粘包
